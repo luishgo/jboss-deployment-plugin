@@ -1,0 +1,46 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<f:section title="JBoss Deployment Servers">
+		<f:entry title="Servers">
+			<f:repeatable
+		    		name="servers"
+		    		var="server"
+		    		items="${descriptor.servers}"
+		    		noAddButton="true"
+		    		minimum="1">
+		    		
+				<f:entry title="Server name" field="serverName">
+					<f:textbox field="serverName" value="${server.name}" />
+				</f:entry>
+				
+				<f:entry title="JBoss Home" field="jbossHome">
+					<f:textbox field="jbossHome" value="${server.jbossHome}" />
+				</f:entry>
+				
+				<f:entry title="Controller Name" field="controllerName">
+					<f:textbox field="controllerName" value="${server.controllerName}" />
+				</f:entry>
+				
+				<f:entry title="Controller Port" field="controllerPort">
+					<f:textbox field="controllerPort" value="${server.controllerPort}" default="9999" />
+				</f:entry>
+				
+				<f:entry title="Username" field="username">
+					<f:textbox field="username" value="${server.username}" />
+				</f:entry>
+				
+				<f:entry title="Password" field="password">
+					<f:textbox field="password" value="${server.password}" />
+				</f:entry>
+
+				<f:entry>
+					<div align="right">
+						<input type="button" value="Add server" class="repeatable-add show-if-last" />
+						<input type="button" value="Delete"
+							class="repeatable-delete show-if-not-only" style="margin-left: 1em;" />
+					</div>
+				</f:entry>
+
+		    </f:repeatable>
+		</f:entry>
+	</f:section>
+</j:jelly>
