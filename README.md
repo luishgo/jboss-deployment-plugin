@@ -1,0 +1,4 @@
+JBoss Deployment Plugin
+=====================
+
+This plugin is designed with JBoss AS 7.x in mind. It allows deployment using JBoss CLI for servers running in domain and standalone modes.
