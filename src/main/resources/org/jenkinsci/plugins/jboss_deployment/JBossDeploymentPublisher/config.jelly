@@ -6,6 +6,10 @@
 	</j:if>
 
 	<j:if test="${!empty(descriptor.servers)}">
+		<f:entry title="Artifacts to deploy">
+			<f:textbox field="filter" />
+		</f:entry>
+	
 		<f:entry title="Server">
 			<select class="setting-input" name="serverName">
 	        	<j:forEach var="serv" items="${descriptor.servers}">
