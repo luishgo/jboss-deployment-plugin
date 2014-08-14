@@ -34,12 +34,12 @@
 							<f:password field="password" value="${server.password}" />
 						</f:entry>
 						
-					    <f:optionalBlock field="domain" title="Domain Mode" description="Check if JBoss is running in Domain mode" inline="true">
+					    <f:optionalBlock field="domain" title="Domain Mode" description="Check if JBoss is running in Domain mode" inline="true" checked="${server.domain}" >
 					         <f:entry title="Server Groups">
-					         	<f:repeatable field="serverGroups" minimum="0" var="serverGroup" >
+					         	<f:repeatable items="${server.serverGroups}" minimum="0" var="serverGroup" name="serverGroups">
 					         		<table width="100%">
-					         			<f:entry title="Name" field="name">
-					         				<f:textbox />
+					         			<f:entry title="Name">
+					         				<f:textbox name="name" value="${serverGroup}" />
 					         			</f:entry>
 					         		</table>
 					         		<div align="right">

@@ -108,28 +108,21 @@ public class JBossDeploymentPublisher extends Publisher {
 		public boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
 			servers.clear();
 
-			JSONObject serverObject = formData.optJSONObject("servers");
-			if (serverObject != null) {
-				addToServers(serverObject);
-			} else {
-				JSONArray optServersArray = formData.optJSONArray("servers");
-				for (Object o : optServersArray) {
-					addToServers((JSONObject) o);
-				}
+			List<Object> servers = normalizeJSONReturn(formData, "servers");
+			for (Object o : servers) {
+				addToServers((JSONObject) o);
 			}
 
 			save();
 			return super.configure(req, formData);
 		}
-
+		
 		private void addToServers(JSONObject serverObject) {
 			List<String> serverGroups = new ArrayList<String>();
-
-			JSONArray serverGroupsJSON = serverObject.optJSONArray("serverGroups");
-			if (serverGroupsJSON != null) {
-				for (Object o : serverGroupsJSON) {
-					serverGroups.add(((JSONObject) o).getString("name"));
-				}
+			
+			List<Object> serverGroupsJSON = normalizeJSONReturn(serverObject, "serverGroups");
+			for (Object o : serverGroupsJSON) {
+				serverGroups.add(((JSONObject) o).getString("name"));
 			}
 
 			servers.add(new ServerBean(serverObject.getString("name"), 
@@ -140,6 +133,20 @@ public class JBossDeploymentPublisher extends Publisher {
 					serverObject.getString("password"), 
 					serverObject.getBoolean("domain"), 
 					serverGroups));
+		}
+		
+		private List<Object> normalizeJSONReturn(JSONObject data, String objectName) {
+			List<Object> objects = new ArrayList<Object>();
+			
+			JSONObject optObject = data.optJSONObject(objectName);
+			if (optObject != null) {
+				objects.add(optObject);
+			} else {
+				JSONArray optArray = data.optJSONArray(objectName);
+				if (optArray != null) objects.addAll(optArray);
+			}
+
+			return objects;
 		}
 
 		protected ServerBean findServer(String serverProfileName) {
