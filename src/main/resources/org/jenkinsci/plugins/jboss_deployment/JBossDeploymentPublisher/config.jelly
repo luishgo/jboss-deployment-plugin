@@ -6,22 +6,17 @@
 	</j:if>
 
 	<j:if test="${!empty(descriptor.servers)}">
-		<f:entry title="Artifacts to deploy">
-			<f:textbox field="filter" />
-		</f:entry>
-	
-		<f:entry title="Server">
-			<select class="setting-input" name="serverName">
-	        	<j:forEach var="serv" items="${descriptor.servers}">
-	          		<f:option selected="${serv.name==instance.serverName}" value="${serv.name}">${serv.name}</f:option>
-	        	</j:forEach>
-			</select>
+		<f:entry title="Artifacts to deploy" field="filter">
+			<f:textbox />
 		</f:entry>
 		
-		<f:entry title="Server Group">
-			<f:textbox field="serverGroupName" />
+		<f:entry title="Server" field="serverName" >
+			<f:select />
 		</f:entry>
 		
+		<f:entry title="Server Group" field="serverGroupName">
+			<f:select />
+		</f:entry>
 	</j:if>
 
 </j:jelly>

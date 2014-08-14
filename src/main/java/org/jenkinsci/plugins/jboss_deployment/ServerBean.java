@@ -1,5 +1,7 @@
 package org.jenkinsci.plugins.jboss_deployment;
 
+import java.util.List;
+
 public class ServerBean {
 	
 	private String name;
@@ -15,8 +17,10 @@ public class ServerBean {
 	private String password;
 
 	private boolean domain;
+
+	private List<String> serverGroups;
 	
-	public ServerBean(String name, String jbossHome, String controllerName, Integer controllerPort, String username, String password, boolean domain) {
+	public ServerBean(String name, String jbossHome, String controllerName, Integer controllerPort, String username, String password, boolean domain, List<String> serverGroups) {
 		this.name = name;
 		this.jbossHome = jbossHome;
 		this.controllerName = controllerName;
@@ -24,6 +28,7 @@ public class ServerBean {
 		this.username = username;
 		this.password = password;
 		this.domain = domain;
+		this.serverGroups = serverGroups;
 	}
 	
 	public String getName() {
@@ -84,6 +89,14 @@ public class ServerBean {
 
 	public void setDomain(boolean domain) {
 		this.domain = domain;
+	}
+
+	public List<String> getServerGroups() {
+		return serverGroups;
+	}
+
+	public void setServerGroups(List<String> serverGroups) {
+		this.serverGroups = serverGroups;
 	}
 
 }
